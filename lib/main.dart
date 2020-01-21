@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_notes/route/EchoRoute.dart';
+import 'package:flutter_notes/route/NewRoute.dart';
+import 'package:flutter_notes/route/RouterTestRoute.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,6 +23,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
+
+      routes: {
+        "new_page":(context) => NewRoute(),
+        "home":(context) => MyHomePage(title: "Flutter Homde Page"),
+        "ech":(context) =>EchoRoute()
+      },
+      initialRoute: 'new_page',
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -98,6 +108,35 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
+            FlatButton(
+              child: Text("打开新的路由 open new route"),
+              textColor: Colors.blue,
+              //点击操作 跳转路由
+              onPressed: (){
+                //Navigator 路由管理组件 提供打开和退路由页的方法
+//                Navigator.push(context,
+//                //MaterialPageRoute 有整个屏幕空间的一个模态路由页面，它还定义了路由构建及切换时过渡动画的相关接口及属性
+//                MaterialPageRoute(builder: (context){
+//                  return NewRoute();
+//                }));
+              Navigator.pushNamed(context, "new_page");
+              },
+            ),
+            FlatButton(
+              child: Text("_命名路由传值"),
+              textColor: Colors.blue,
+              //点击操作 跳转路由
+              onPressed: (){
+                //Navigator 路由管理组件 提供打开和退路由页的方法
+//                Navigator.push(context,
+//                //MaterialPageRoute 有整个屏幕空间的一个模态路由页面，它还定义了路由构建及切换时过渡动画的相关接口及属性
+//                MaterialPageRoute(builder: (context){
+//                  return NewRoute();
+//                }));
+                Navigator.of(context).pushNamed("ech",arguments: "hi");
+              },
+            ),
+            RouterTestRoute()
           ],
         ),
       ),
@@ -109,5 +148,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-//路由
